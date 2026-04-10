@@ -1,59 +1,26 @@
-# SkillSwap
+# 🔄 SkillSwap: Платформа за Бартер на Умения
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+## 1. Цел на приложението
+SkillSwap е уеб приложение (SPA), разработено с Angular, което улеснява директния обмен на знания между потребители без намесата на парични средства. Целта е да се създаде общност, в която времето и уменията са основната валута("размяна на време за време").
 
-## Development server
+## 2. Потребителски пътища
+- **Anonymous User (Гост):** Може да достъпва началната страница (`Home`) и да разглежда списъка с всички обяви в каталога (`Catalog`), както и детайлите за дадени обяви.
+- **Registered User (Потребител):** След вход в системата, потребителят получава достъп до частната част, където може да създава нови обяви, да редактира своите записи и да ги изтрива (CRUD).
+- **Authentication Flow:** Системата не позволява на вписани потребители да достъпват страниците за Login/Register чрез Route Guards.
 
-To start a local development server, run:
+### 3. Core Features (Основни функции) 
+- **Публичен Каталог:** Визуализация на всички налични умения за бартер, предоставени от външен източник на данни (Firebase/Custom API).
+- **Детайлна информация:** Специализирана страница за всеки запис с подробности какво се предлага и какво се търси в замяна.
+- **Персонален мениджмънт:** Потребителите имат пълен контрол върху собственото си съдържание, но нямат право да променят чужди обяви.
+- **Валидация в реално време:** Всички форми (Auth & Create) разполагат със стриктни правила за сигурност и UX обратна връзка.
 
-```bash
-ng serve
-```
+### 4. User Interaction (Взаимодействие)
+* Потребителите взаимодействат с платформата чрез интуитивно навигационно меню (Header).
+* Връзката с данните е асинхронна (RxJS/Observables), което осигурява бърза работа на интерфейса без презареждане.
+* При грешки в мрежата или невалидни данни, системата показва приятелски съобщения (Error Handling).
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🚀 Инструкции за инсталация и стартиране [cite: 94]
+1. Клонирайте хранилището: `git clone https://github.com/victoriabondova/skill-swap.git`
+2. Инсталирайте зависимостите: `npm install`
+3. Стартирайте проекта: `ng serve`
+4. Отворете браузъра на: `http://localhost:4200`
