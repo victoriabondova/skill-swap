@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ISkill } from '../../interfaces/skill.interface';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css',
 })
