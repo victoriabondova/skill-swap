@@ -1,10 +1,11 @@
 <section class="catalog-container">
   <h2>Всички предложения за бартер</h2>
-  <div class="skills-grid" style="display: flex; gap: 20px;">
-    <div *ngFor="let skill of skills" class="skill-card" style="border: 1px solid #ccc; padding: 15px;">
+  
+  <div class="skills-grid">
+    <div *ngFor="let skill of skills" class="skill-card" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
       <h3>{{ skill.title }}</h3>
-      <p>От: {{ skill.ownerName }}</p>
-      <button>Виж детайли</button>
+      <p>Категория: {{ skill.category }}</p>
+      <button [routerLink]="['/details', skill._id]">Виж детайли</button>
     </div>
   </div>
 </section>
