@@ -1,6 +1,10 @@
 <section class="catalog-container">
   <h2>Всички предложения за бартер</h2>
-  <div class="skills-grid">
-    <p>Зареждане на обяви...</p>
+  <div class="skills-grid" style="display: flex; gap: 20px;">
+    <div *ngFor="let skill of skills" class="skill-card" style="border: 1px solid #ccc; padding: 15px;">
+      <h3>{{ skill.title }}</h3>
+      <p>От: {{ skill.ownerName }}</p>
+      <button>Виж детайли</button>
+    </div>
   </div>
 </section>

@@ -3,7 +3,6 @@ export interface ISkill {
     title: string;
     category: string;
     description: string;
-    lookingFor: string;
     ownerId: string;
     ownerName: string;
     createdAt: number;
