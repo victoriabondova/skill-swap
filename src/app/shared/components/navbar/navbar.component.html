@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/home">🔄 SkillSwap</a>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Начало</a>
+    <a routerLink="/offers" routerLinkActive="active">Оферти</a>
+
+    <ng-container *ngIf="authService.currentUser$ | async as user; else guestLinks">
+      <a routerLink="/offers/create" routerLinkActive="active">+ Нова оферта</a>
+      <a routerLink="/swaps" routerLinkActive="active">Размени</a>
+      <a routerLink="/profile" routerLinkActive="active">{{ user.displayName }}</a>
+      <button class="btn-logout" (click)="logout()">Изход</button>
+    </ng-container>
+
+    <ng-template #guestLinks>
+      <a routerLink="/login" routerLinkActive="active">Вход</a>
+      <a routerLink="/register" routerLinkActive="active" class="btn-register">Регистрация</a>
+    </ng-template>
+  </div>
+</nav>

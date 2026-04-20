@@ -1,19 +1,13 @@
-footer {
-  background-color: #222;
-  color: #fff;
+.footer {
+  background: #1a1a2e;
+  border-top: 1px solid #0f3460;
+  margin-top: auto;
+  padding-bottom: 1rem;
+}
+.footer-bottom {
   text-align: center;
-  padding: 20px 0;
-  margin-top: 40px;
-  width: 100%;
-}
-
-.footer-content p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.footer-links {
-  margin-top: 10px;
-  font-size: 0.8rem;
-  color: #aaa;
+  color: #555;
+  font-size: 0.82rem;
+  border-top: 1px solid #0f3460;
+  padding-top: 1rem;
 }
