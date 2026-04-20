@@ -1,7 +1,50 @@
-<section class="home-hero">
-  <h1>Добре дошли в SkillSwap!</h1>
-  <p>Обменете своите знания без пари. Научете програмиране, музика или езици чрез бартер за други умения.</p>
-  <div class="actions">
-    <button routerLink="/catalog">Разгледай обявите</button>
+<div class="hero" [@heroAnimation]>
+  <div class="hero-content">
+    <h1>Размени умение <span class="highlight">за умение</span></h1>
+    <p>Предложи това което знаеш, научи това което искаш. Без пари — само знания.</p>
+    <div class="hero-buttons">
+      <a routerLink="/offers" class="btn-primary">Разгледай оферти</a>
+      <a routerLink="/register" class="btn-secondary">Започни сега</a>
+    </div>
   </div>
-</section>
+  <div class="hero-visual">
+    <div class="swap-example">
+      <div class="skill-box">🐍 Python урок</div>
+      <div class="swap-arrow">⇄</div>
+      <div class="skill-box">🎸 Китара урок</div>
+    </div>
+  </div>
+</div>
+<div class="categories-section">
+  <div class="container">
+    <h2>Категории</h2>
+    <div class="categories-grid" [@categoriesAnimation]>
+      <a *ngFor="let cat of categories" [routerLink]="['/offers']" class="category-card">
+        <span class="cat-icon">{{ cat.icon }}</span>
+        <span class="cat-name">{{ cat.name }}</span>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="how-it-works">
+  <div class="container">
+    <h2>Как работи?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Регистрирай се</h3>
+        <p>Създай безплатен акаунт за секунди</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Публикувай оферта</h3>
+        <p>Кажи какво предлагаш и какво търсиш</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Размени умения</h3>
+        <p>Свържи се с хора и започни да учиш</p>
+      </div>
+    </div>
+  </div>
+</div>
