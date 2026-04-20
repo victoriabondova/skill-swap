@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
-import { CatalogComponent } from './features/catalog/catalog.component';
+import { CatalogComponent } from './features/offers/catalog/catalog.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 
