@@ -1,0 +1,86 @@
+<div class="swaps-container">
+  <div class="swaps-header">
+    <h1>Заявки за размяна</h1>
+    <p>Управлявай твоите заявки за размяна на умения</p>
+  </div>
+  <div class="tabs">
+    <button
+      [class.active]="activeTab === 'received'"
+      (click)="activeTab = 'received'"
+      class="tab-btn">
+      📥 Получени
+      <span class="badge" *ngIf="receivedRequests.length > 0">{{ receivedRequests.length }}</span>
+    </button>
+    <button
+      [class.active]="activeTab === 'sent'"
+      (click)="activeTab = 'sent'"
+      class="tab-btn">
+      📤 Изпратени
+      <span class="badge" *ngIf="sentRequests.length > 0">{{ sentRequests.length }}</span>
+    </button>
+  </div>
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Зареждане...</p>
+  </div>
+  <ng-container *ngIf="!isLoading">
+    <div *ngIf="activeTab === 'received'">
+      <div class="empty-state" *ngIf="receivedRequests.length === 0">
+        <p>📭 Нямаш получени заявки все още.</p>
+        <a routerLink="/offers" class="btn-primary">Разгледай офертите</a>
+      </div>
+      <div class="requests-list" *ngIf="receivedRequests.length > 0">
+        <div class="request-card" *ngFor="let req of receivedRequests">
+          <div class="request-header">
+            <div class="requester">
+              <div class="avatar">{{ req.fromUserName.charAt(0).toUpperCase() }}</div>
+              <div>
+                <strong>{{ req.fromUserName }}</strong>
+                <span class="time">{{ req.createdAt | timeAgo }}</span>
+              </div>
+            </div>
+            <span class="status-badge" [ngClass]="req.status">
+              {{ getStatusLabel(req.status) }}
+            </span>
+          </div>
+          <div class="offer-ref">
+            <span>За оферта: </span>
+            <a [routerLink]="['/offers', req.offerId]">{{ req.offerTitle }}</a>
+          </div>
+          <div class="message">
+            <p>{{ req.message }}</p>
+          </div>
+          <div class="request-actions" *ngIf="req.status === 'pending'">
+            <button (click)="acceptRequest(req.id!)" class="btn-accept">✅ Приеми</button>
+            <button (click)="rejectRequest(req.id!)" class="btn-reject">❌ Откажи</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'sent'">
+      <div class="empty-state" *ngIf="sentRequests.length === 0">
+        <p>📭 Нямаш изпратени заявки все още.</p>
+        <a routerLink="/offers" class="btn-primary">Разгледай офертите</a>
+      </div>
+      <div class="requests-list" *ngIf="sentRequests.length > 0">
+        <div class="request-card" *ngFor="let req of sentRequests">
+          <div class="request-header">
+            <div class="requester">
+              <div class="offer-icon">🔄</div>
+              <div>
+                <strong>{{ req.offerTitle }}</strong>
+                <span class="time">{{ req.createdAt | timeAgo }}</span>
+              </div>
+            </div>
+            <span class="status-badge" [ngClass]="req.status">
+              {{ getStatusLabel(req.status) }}
+            </span>
+          </div>
+          <div class="message">
+            <p>{{ req.message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

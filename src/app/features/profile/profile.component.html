@@ -1,0 +1,40 @@
+<div class="profile-container">
+  <div class="profile-header" *ngIf="currentUser">
+    <div class="avatar">{{ currentUser.displayName?.charAt(0).toUpperCase() }}</div>
+    <div class="user-info">
+      <h1>{{ currentUser.displayName }}</h1>
+      <p>{{ currentUser.email }}</p>
+    </div>
+    <a routerLink="/offers/create" class="btn-primary">+ Нова оферта</a>
+  </div>
+  <div class="section">
+    <h2>Моите оферти</h2>
+    <div class="loading" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Зареждане...</p>
+    </div>
+    <div class="empty-state" *ngIf="!isLoading && offers.length === 0">
+      <p>🔍 Нямаш публикувани оферти все още.</p>
+      <a routerLink="/offers/create" class="btn-primary">Създай първата си оферта</a>
+    </div>
+    <div class="offers-list" *ngIf="!isLoading && offers.length > 0">
+      <div class="offer-item" *ngFor="let offer of offers">
+        <div class="offer-info">
+          <span class="category-badge">{{ offer.category }}</span>
+          <h3>{{ offer.title }}</h3>
+          <div class="offer-swap">
+            <span class="offering">{{ offer.offering }}</span>
+            <span class="arrow">⇄</span>
+            <span class="seeking">{{ offer.seeking }}</span>
+          </div>
+          <span class="time">{{ offer.createdAt | timeAgo }}</span>
+        </div>
+        <div class="offer-actions">
+          <a [routerLink]="['/offers', offer.id]" class="btn-view">👁️ Виж</a>
+          <a [routerLink]="['/offers', offer.id, 'edit']" class="btn-edit">✏️ Редактирай</a>
+          <button (click)="deleteOffer(offer.id!)" class="btn-delete">🗑️ Изтрий</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
