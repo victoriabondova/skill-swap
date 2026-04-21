@@ -1,9 +1,70 @@
-<div class="auth-form">
-  <h2>Регистрация</h2>
-  <form>
-    <input type="text" placeholder="Потребителско име" name="username">
-    <input type="email" placeholder="Имейл" name="email">
-    <input type="password" placeholder="Парола" name="password">
-    <button type="submit">Създай профил</button>
-  </form>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Създай акаунт</h2>
+      <p>Присъедини се към SkillSwap</p>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="displayName">Име</label>
+        <input
+          id="displayName"
+          type="text"
+          formControlName="displayName"
+          placeholder="Иван Иванов"
+          [class.invalid]="displayName?.invalid && displayName?.touched"/>
+        <span class="error-msg" *ngIf="displayName?.invalid && displayName?.touched">
+          <span *ngIf="displayName?.errors?.['required']">Името е задължително</span>
+          <span *ngIf="displayName?.errors?.['minlength']">Минимум 2 символа</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="email">Имейл</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="example@email.com"
+          [class.invalid]="email?.invalid && email?.touched"/>
+        <span class="error-msg" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Имейлът е задължителен</span>
+          <span *ngIf="email?.errors?.['email']">Невалиден имейл</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="password">Парола</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          [class.invalid]="password?.invalid && password?.touched"/>
+        <span class="error-msg" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Паролата е задължителна</span>
+          <span *ngIf="password?.errors?.['minlength']">Минимум 6 символа</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Потвърди парола</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="••••••••"
+          [class.invalid]="confirmPassword?.touched && registerForm.errors?.['passwordMismatch']"/>
+        <span class="error-msg" *ngIf="confirmPassword?.touched && registerForm.errors?.['passwordMismatch']">
+          Паролите не съвпадат
+        </span>
+      </div>
+      <div class="error-msg server-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="isLoading">
+        {{ isLoading ? 'Регистрация...' : 'Регистрирай се' }}
+      </button>
+    </form>
+    <div class="auth-footer">
+      <p>Вече имаш акаунт? <a routerLink="/login">Влез</a></p>
+    </div>
+  </div>
 </div>

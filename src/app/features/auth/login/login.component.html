@@ -1,9 +1,45 @@
-<div class="auth-form">
-  <h2>Вход в системата</h2>
-  <form>
-    <input type="email" placeholder="Имейл" name="email">
-    <input type="password" placeholder="Парола" name="password">
-    <button type="submit">Влез</button>
-  </form>
-  <p>Нямате профил? <a routerLink="/register">Регистрирайте се тук</a></p>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Добре дошъл обратно!</h2>
+      <p>Влез в своя акаунт</p>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Имейл</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="example@email.com"
+          [class.invalid]="email?.invalid && email?.touched"/>
+        <span class="error-msg" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Имейлът е задължителен</span>
+          <span *ngIf="email?.errors?.['email']">Невалиден имейл</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="password">Парола</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          [class.invalid]="password?.invalid && password?.touched"/>
+        <span class="error-msg" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Паролата е задължителна</span>
+          <span *ngIf="password?.errors?.['minlength']">Минимум 6 символа</span>
+        </span>
+      </div>
+      <div class="error-msg server-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="isLoading">
+        {{ isLoading ? 'Влизане...' : 'Вход' }}
+      </button>
+    </form>
+    <div class="auth-footer">
+      <p>Нямаш акаунт? <a routerLink="/register">Регистрирай се</a></p>
+    </div>
+  </div>
 </div>
