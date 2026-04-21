@@ -1,0 +1,151 @@
+.catalog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+.catalog-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.catalog-header h1 {
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.catalog-header p {
+  color: #aaa;
+}
+.categories-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+.filter-btn {
+  background: #1a1a2e;
+  border: 1px solid #0f3460;
+  color: #ccc;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: #e94560;
+  border-color: #e94560;
+  color: white;
+}
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #aaa;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #0f3460;
+  border-top-color: #e94560;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  color: #aaa;
+}
+.empty-state p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.btn-primary {
+  background: #e94560;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-primary:hover {
+  background: #c73652;
+}
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.offer-card {
+  background: #1a1a2e;
+  border: 1px solid #0f3460;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+}
+.offer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(233, 69, 96, 0.15);
+  border-color: #e94560;
+}
+.offer-category {
+  display: inline-block;
+  background: #0f3460;
+  color: #e94560;
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.offer-title {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.offer-swap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  background: #16213e;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+.swap-item {
+  flex: 1;
+  text-align: center;
+}
+.swap-item .label {
+  display: block;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 0.2rem;
+}
+.swap-item .value {
+  display: block;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.swap-icon {
+  color: #e94560;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.offer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #aaa;
+  border-top: 1px solid #0f3460;
+  padding-top: 0.8rem;
+}

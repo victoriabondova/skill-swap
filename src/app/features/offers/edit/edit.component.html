@@ -1,0 +1,92 @@
+<div class="form-container">
+  <div class="form-header">
+    <a [routerLink]="['/offers', offerId]" class="back-link">← Обратно</a>
+    <h1>Редактирай оферта</h1>
+    <p>Промени детайлите на твоята оферта</p>
+  </div>
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Зареждане...</p>
+  </div>
+  <div class="error-msg server-error" *ngIf="errorMessage && !isLoading">
+    {{ errorMessage }}
+  </div>
+  <div class="form-card" *ngIf="!isLoading">
+    <form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Заглавие *</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          [class.invalid]="title?.invalid && title?.touched"/>
+        <span class="error-msg" *ngIf="title?.invalid && title?.touched">
+          <span *ngIf="title?.errors?.['required']">Заглавието е задължително</span>
+          <span *ngIf="title?.errors?.['minlength']">Минимум 5 символа</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="category">Категория *</label>
+        <select
+          id="category"
+          formControlName="category"
+          [class.invalid]="category?.invalid && category?.touched">
+          <option value="">-- Избери категория --</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <span class="error-msg" *ngIf="category?.invalid && category?.touched">
+          Моля избери категория
+        </span>
+      </div>
+      <div class="swap-fields">
+        <div class="form-group">
+          <label for="offering">Какво предлагам *</label>
+          <input
+            id="offering"
+            type="text"
+            formControlName="offering"
+            [class.invalid]="offering?.invalid && offering?.touched"/>
+          <span class="error-msg" *ngIf="offering?.invalid && offering?.touched">
+            <span *ngIf="offering?.errors?.['required']">Полето е задължително</span>
+            <span *ngIf="offering?.errors?.['minlength']">Минимум 3 символа</span>
+          </span>
+        </div>
+        <div class="swap-divider">⇄</div>
+        <div class="form-group">
+          <label for="seeking">Какво търся *</label>
+          <input
+            id="seeking"
+            type="text"
+            formControlName="seeking"
+            [class.invalid]="seeking?.invalid && seeking?.touched"/>
+          <span class="error-msg" *ngIf="seeking?.invalid && seeking?.touched">
+            <span *ngIf="seeking?.errors?.['required']">Полето е задължително</span>
+            <span *ngIf="seeking?.errors?.['minlength']">Минимум 3 символа</span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Описание *</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="5"
+          [class.invalid]="description?.invalid && description?.touched">
+        </textarea>
+        <span class="error-msg" *ngIf="description?.invalid && description?.touched">
+          <span *ngIf="description?.errors?.['required']">Описанието е задължително</span>
+          <span *ngIf="description?.errors?.['minlength']">Минимум 20 символа</span>
+        </span>
+      </div>
+      <div class="error-msg server-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="isSaving">
+          {{ isSaving ? 'Запазване...' : '✅ Запази промените' }}
+        </button>
+        <a [routerLink]="['/offers', offerId]" class="btn-secondary">Откажи</a>
+      </div>
+    </form>
+  </div>
+</div>

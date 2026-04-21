@@ -1,0 +1,75 @@
+<div class="details-container">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="error-msg" *ngIf="errorMessage && !isLoading">
+    {{ errorMessage }}
+    <a routerLink="/offers">← Обратно към офертите</a>
+  </div>
+  <ng-container *ngIf="!isLoading && offer">
+    <div class="back-link">
+      <a routerLink="/offers">← Обратно към офертите</a>
+    </div>
+    <div class="details-card">
+      <div class="details-header">
+        <span class="category-badge">{{ offer.category }}</span>
+        <h1>{{ offer.title }}</h1>
+        <div class="meta">
+          <span>👤 {{ offer.ownerName }}</span>
+          <span>🕐 {{ offer.createdAt | timeAgo }}</span>
+        </div>
+      </div>
+      <div class="swap-section">
+        <div class="swap-box offering">
+          <h3>Предлагам</h3>
+          <p>{{ offer.offering }}</p>
+        </div>
+        <div class="swap-arrow">⇄</div>
+        <div class="swap-box seeking">
+          <h3>Търся</h3>
+          <p>{{ offer.seeking }}</p>
+        </div>
+      </div>
+      <div class="description-section" *ngIf="offer.description">
+        <h3>Описание</h3>
+        <p>{{ offer.description }}</p>
+      </div>
+      <div class="success-msg" *ngIf="successMessage">
+        ✅ {{ successMessage }}
+      </div>
+      <div class="actions" *ngIf="authService.currentUser$ | async as user">
+        <ng-container *ngIf="isOwner">
+          <a [routerLink]="['/offers', offer.id, 'edit']" class="btn-secondary">✏️ Редактирай</a>
+          <button (click)="deleteOffer()" class="btn-danger">🗑️ Изтрий</button>
+        </ng-container>
+        <ng-container *ngIf="!isOwner">
+          <button (click)="showSwapForm = !showSwapForm" class="btn-primary">
+            🔄 Предложи размяна
+          </button>
+        </ng-container>
+      </div>
+      <div class="guest-actions" *ngIf="!(authService.currentUser$ | async)">
+        <p>Искаш да предложиш размяна?</p>
+        <a routerLink="/login" class="btn-primary">Влез в акаунта си</a>
+      </div>
+      <div class="swap-form" *ngIf="showSwapForm">
+        <h3>Изпрати заявка за размяна</h3>
+        <form [formGroup]="swapForm" (ngSubmit)="sendSwapRequest()">
+          <div class="form-group">
+            <label>Съобщение към {{ offer.ownerName }}</label>
+            <textarea
+              formControlName="message"
+              rows="4"
+              placeholder="Разкажи повече за себе си и защо искаш тази размяна...">
+            </textarea>
+            <span class="error-msg" *ngIf="swapForm.get('message')?.invalid && swapForm.get('message')?.touched">
+              Съобщението трябва да е поне 10 символа
+            </span>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Изпрати</button>
+            <button type="button" class="btn-secondary" (click)="showSwapForm = false">Откажи</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</div>

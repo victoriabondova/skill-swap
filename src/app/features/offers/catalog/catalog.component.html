@@ -1,11 +1,44 @@
-<section class="catalog-container">
-  <h2>Всички предложения за бартер</h2>
-  
-  <div class="skills-grid">
-    <div *ngFor="let skill of skills" class="skill-card" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
-      <h3>{{ skill.title }}</h3>
-      <p>Категория: {{ skill.category }}</p>
-      <button [routerLink]="['/details', skill._id]">Виж детайли</button>
-    </div>
+<div class="catalog-container">
+  <div class="catalog-header">
+    <h1>Всички оферти</h1>
+    <p>Намери умение което искаш да научиш</p>
   </div>
-</section>
+  <div class="categories-filter">
+    <button
+      *ngFor="let cat of categories"
+      [class.active]="(selectedCategory === '' && cat === 'Всички') || selectedCategory === cat"
+      (click)="filterByCategory(cat)"
+      class="filter-btn">
+      {{ cat }}
+    </button>
+  </div>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="error-msg" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  <div class="empty-state" *ngIf="!isLoading && !errorMessage && offers.length === 0">
+    <p>🔍 Няма намерени оферти в тази категория.</p>
+    <a routerLink="/offers/create" class="btn-primary">Създай първата оферта</a>
+  </div>
+ <div class="offers-grid" [@listAnimation]="offers.length" *ngIf="!isLoading && offers.length > 0">
+  <a *ngFor="let offer of offers" [routerLink]="['/offers', offer.id]" class="offer-card" [@fadeIn]>
+    <div class="offer-category">{{ offer.category }}</div>
+    <h3 class="offer-title">{{ offer.title }}</h3>
+    <div class="offer-swap">
+      <div class="swap-item offering">
+        <span class="label">Предлагам</span>
+        <span class="value">{{ offer.offering }}</span>
+      </div>
+      <div class="swap-icon">⇄</div>
+      <div class="swap-item seeking">
+        <span class="label">Търся</span>
+        <span class="value">{{ offer.seeking }}</span>
+      </div>
+    </div>
+    <div class="offer-footer">
+      <span class="owner">👤 {{ offer.ownerName }}</span>
+      <span class="time">{{ offer.createdAt | timeAgo }}</span>
+    </div>
+  </a>
+</div>
+</div>
