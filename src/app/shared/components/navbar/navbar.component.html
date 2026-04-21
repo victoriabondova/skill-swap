@@ -8,7 +8,7 @@
     <a routerLink="/offers" routerLinkActive="active">Оферти</a>
 
     <ng-container *ngIf="authService.currentUser$ | async as user; else guestLinks">
-      <a routerLink="/offers/create" routerLinkActive="active">+ Нова оферта</a>
+      <a routerLink="/offers/create" routerLinkActive="active">Нова оферта</a>
       <a routerLink="/swaps" routerLinkActive="active">Размени</a>
       <a routerLink="/profile" routerLinkActive="active">{{ user.displayName }}</a>
       <button class="btn-logout" (click)="logout()">Изход</button>
